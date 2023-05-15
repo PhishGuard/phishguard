@@ -37,13 +37,3 @@ To get started with PhishManager, follow these steps:
 6. Run the app on your Android device or emulator to start managing and organizing the screenshots.
 
 
-## Contact
-
-If you have any questions, suggestions, or issues regarding PhishManager, please contact our development team:
-
-- Leon Walder: leon@example.com
-- Fabian Huber: fabian@example.com
-
-We value your feedback and look forward to hearing from you!
-
-![PhishManager Logo](app_logo.png)
