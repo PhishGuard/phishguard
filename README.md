@@ -16,10 +16,8 @@ PhishGuard is an Android Kotlin app designed to efficiently manage screenshots o
 
 PhishManager is developed by a dedicated team with expertise in their respective roles:
 
-- **Leon Walder** - Database Management: Leon is responsible for the design and implementation of the database system that securely stores and manages the screenshots. He ensures data integrity, performance optimization, and database security.
-
-- **Fabian Huber** - App Development: Fabian is in charge of developing the Android Kotlin app, PhishGuard. He leverages his expertise in Android development to create a user-friendly and feature-rich application that enables users to efficiently manage and interact with the screenshot collection.
-
+- **Leon Walder** - Database & App GUI: : Leon is responsible for creating the user interface (UI) and the frontend of the PhishGuard app. He also focuses on developing the database.
+- **Fabian Huber** - Backend & App GUI: Fabian is responsible for connecting the backend system to the PhishGuard app. He is also working for the user interface (UI).
 ## Getting Started
 
 To get started with PhishManager, follow these steps:
