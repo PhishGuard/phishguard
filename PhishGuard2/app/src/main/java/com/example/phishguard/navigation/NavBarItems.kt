@@ -1,10 +1,7 @@
 package com.example.phishguard.navigation
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.*
 
 import androidx.compose.ui.graphics.vector.ImageVector
 
@@ -22,8 +19,13 @@ object NavBarItems {
             route = "home"
         ),
         BarItem(
+            title = "List",
+            image = Icons.Filled.List,
+            route = "list"
+        ),
+        BarItem(
             title = "About",
-            image = Icons.Filled.Face,
+            image = Icons.Filled.Settings,
             route = "about"
         ),
         BarItem(

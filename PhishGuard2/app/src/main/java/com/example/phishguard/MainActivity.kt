@@ -14,6 +14,7 @@ import com.example.phishguard.navigation.NavRoutes
 import com.example.phishguard.navigation.screens.About
 import com.example.phishguard.navigation.screens.Help
 import com.example.phishguard.navigation.screens.Home
+import com.example.phishguard.navigation.screens.List
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -64,15 +65,25 @@ fun MainScreen() {
                 startDestination = NavRoutes.Home.route,
             ) {
                 composable(NavRoutes.Home.route) {
-                    Home(openDrawer = { openDrawer() }, navController)
+                    Home(
+                        openDrawer = { openDrawer() },
+                        navController = navController,
+                        onAddButtonClicked = {
+                            // Implement Action
+                        },
+                        onRemoveButtonClicked = {
+                            // Implement Action
+                        }
+                    )
                 }
-
                 composable(NavRoutes.About.route) {
-                    About(openDrawer = { openDrawer() }, navController)
+                    About(openDrawer = { openDrawer()}, navController)
                 }
-
+                composable(NavRoutes.List.route) {
+                    List(openDrawer = { openDrawer()}, navController)
+                }
                 composable(NavRoutes.Help.route) {
-                    Help(openDrawer = { openDrawer() }, navController)
+                    Help(openDrawer = { openDrawer()}, navController)
                 }
             }
         }

@@ -3,6 +3,7 @@ package com.example.phishguard.navigation.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -11,6 +12,8 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.phishguard.navigation.BottomNavigationBar
 import com.example.phishguard.navigation.TopBar
@@ -23,16 +26,81 @@ fun About(openDrawer: () -> Unit, navController: NavHostController) {
                 TopBar(
                     title = "About",
                     buttonIcon = Icons.Filled.Menu,
-                    onButtonClicked = { openDrawer() }) },
+                    onButtonClicked = { openDrawer() }
+                )
+            },
             content = {
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
-                ) { Text(text = "Our PhishGuard team consists of Leon and Fabian, both students at HTL Villach Cyber Security") } },
+                ) {
+                    Text(
+                        text = "PhishGuard",
+                        style = MaterialTheme.typography.h4,
+                        modifier = Modifier.padding(bottom = 8.dp),
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "PhishGuard is an Android Kotlin app designed to efficiently manage screenshots of login pages obtained from our backend. These screenshots are scraped from various websites and used for phishing landing page templates, primarily for testing purposes. The app allows users to view, organize, and comment on these screenshots, which are stored in a database.",
+                        style = MaterialTheme.typography.body1,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+                    Text(
+                        text = "Features",
+                        style = MaterialTheme.typography.h5,
+                        modifier = Modifier.padding(bottom = 8.dp),
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "Screenshot Management:",
+                        style = MaterialTheme.typography.body1,
+                        modifier = Modifier.padding(bottom = 4.dp)
+                    )
+                    Text(
+                        text = "PhishManager provides a user-friendly interface to view and manage the collection of screenshots obtained from the backend. Users can easily browse through the screenshots and access their details.",
+                        style = MaterialTheme.typography.body1,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+                    // Add other features with appropriate styles and padding
+
+                    Text(
+                        text = "Team",
+                        style = MaterialTheme.typography.h5,
+                        modifier = Modifier.padding(bottom = 8.dp),
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "PhishManager is developed by a dedicated team with expertise in their respective roles:",
+                        style = MaterialTheme.typography.body1,
+                        modifier = Modifier.padding(bottom = 4.dp)
+                    )
+                    Text(
+                        text = "Leon Walder - Database & App GUI:",
+                        style = MaterialTheme.typography.body1,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(bottom = 4.dp)
+                    )
+                    Text(
+                        text = "Leon is responsible for creating the user interface (UI) and the frontend of the PhishGuard app. He also focuses on developing the database.",
+                        style = MaterialTheme.typography.body1,
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+                    Text(
+                        text = "Fabian Huber - Backend & App GUI:",
+                        style = MaterialTheme.typography.body1,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(bottom = 4.dp)
+                    )
+                    Text(
+                        text = "Fabian is responsible for connecting the backend system to the PhishGuard app. He is also working for the user interface (UI).",
+                        style = MaterialTheme.typography.body1,
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+                }
+            },
             bottomBar = {
-                BottomNavigationBar(
-                    navController = navController)
+                BottomNavigationBar(navController = navController)
             }
         )
     }
