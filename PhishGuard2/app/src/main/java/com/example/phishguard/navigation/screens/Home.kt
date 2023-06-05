@@ -1,4 +1,8 @@
 package com.example.phishguard.navigation.screens
+import com.example.phishguard.navigation.network.backendService
+import com.example.phishguard.navigation.network.SubmitDataRequest
+
+
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -14,6 +18,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.phishguard.navigation.BottomNavigationBar
 import com.example.phishguard.navigation.TopBar
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 @Composable
 fun Home(
@@ -24,6 +32,10 @@ fun Home(
 ) {
     var searchQuery by remember { mutableStateOf("") }
     var removeId by remember { mutableStateOf("") }
+    data class SubmitDataRequest(
+        val link: String,
+        val screenshotId: Int
+    )
 
     Column(modifier = Modifier.fillMaxSize()) {
         Scaffold(
@@ -54,11 +66,31 @@ fun Home(
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     Button(
-                        onClick = { onAddButtonClicked(searchQuery) },
+                        onClick = {
+                            // Create an instance of the data you want to send to the backend
+                            val request = SubmitDataRequest(searchQuery, removeId.toIntOrNull() ?: 0)// Replace `Data` with your actual data class
+
+                            // Make the backend call using the Retrofit service
+                            backendService.submitData(request).enqueue(object : Callback<Void> {
+                                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                                    // Handle the response from the backend
+                                    if (response.isSuccessful) {
+                                        // Success
+                                    } else {
+                                        // Handle error
+                                    }
+                                }
+
+                                override fun onFailure(call: Call<Void>, t: Throwable) {
+                                    // Handle network or other errors
+                                }
+                            })
+                        },
                         modifier = Modifier.padding(horizontal = 16.dp)
                     ) {
                         Text(text = "ADD")
                     }
+
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(text = "Enter ID to Remove:")
                     TextField(
