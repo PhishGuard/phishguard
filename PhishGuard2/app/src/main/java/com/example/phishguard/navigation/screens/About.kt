@@ -1,9 +1,7 @@
 package com.example.phishguard.navigation.screens
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -15,18 +13,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.phishguard.MainViewModel
 import com.example.phishguard.navigation.BottomNavigationBar
+import com.example.phishguard.navigation.NavRoutes
 import com.example.phishguard.navigation.TopBar
 
 @Composable
-fun About(openDrawer: () -> Unit, navController: NavHostController) {
+fun About(navController: NavHostController) {
     Column(modifier = Modifier.fillMaxSize()) {
         Scaffold(
             topBar = {
                 TopBar(
                     title = "About",
                     buttonIcon = Icons.Filled.Menu,
-                    onButtonClicked = { openDrawer() }
+                    onButtonClicked = {}
                 )
             },
             content = {
@@ -97,6 +97,15 @@ fun About(openDrawer: () -> Unit, navController: NavHostController) {
                         style = MaterialTheme.typography.body1,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Button(
+                        onClick = { navController.navigate(NavRoutes.Home.route) },
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    ) {
+                        Text(text = "Add/Remove Screenshot")
+                    }
+
                 }
             },
             bottomBar = {

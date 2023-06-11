@@ -14,6 +14,11 @@ data class BarItem(
 object NavBarItems {
     val BarItems = listOf(
         BarItem(
+            title = "Login",
+            image = Icons.Filled.Build,
+            route = "home"
+        ),
+        BarItem(
             title = "Home",
             image = Icons.Filled.Home,
             route = "home"

@@ -9,24 +9,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.compose.ui.platform.LocalUriHandler
+import com.example.phishguard.MainViewModel
 import com.example.phishguard.navigation.BottomNavigationBar
+import com.example.phishguard.navigation.NavRoutes
 import com.example.phishguard.navigation.TopBar
-import kotlinx.coroutines.launch
 
 @Composable
-fun Help(openDrawer: () -> Unit, navController: NavHostController) {
-    val scope = rememberCoroutineScope()
-    val uriHandler = LocalUriHandler.current
-
-    var showLinkClicked by remember { mutableStateOf(false) }
-
-    val handleClick = {
-        scope.launch {
-            val url = "https://github.com/PhishGuard/phishguard/"
-            uriHandler.openUri(url)
-        }
-    }
+fun Help(navController: NavHostController) {
 
     Column(modifier = Modifier.fillMaxSize()) {
         Scaffold(
@@ -34,7 +23,7 @@ fun Help(openDrawer: () -> Unit, navController: NavHostController) {
                 TopBar(
                     title = "Help",
                     buttonIcon = Icons.Filled.Menu,
-                    onButtonClicked = { openDrawer() }
+                    onButtonClicked = {}
                 )
             },
             content = {
@@ -48,14 +37,10 @@ fun Help(openDrawer: () -> Unit, navController: NavHostController) {
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Button(
-                        onClick = { handleClick() },
+                        onClick = { navController.navigate(NavRoutes.About.route) },
                         modifier = Modifier.padding(horizontal = 16.dp)
                     ) {
                         Text(text = "Help")
-                    }
-
-                    if (showLinkClicked) {
-                        Text(text = "Link clicked!")
                     }
                 }
             },
@@ -65,5 +50,6 @@ fun Help(openDrawer: () -> Unit, navController: NavHostController) {
         )
     }
 }
+
 
 

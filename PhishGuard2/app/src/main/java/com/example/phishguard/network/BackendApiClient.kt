@@ -1,3 +1,6 @@
+package com.example.phishguard.network
+
+/*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -11,3 +14,4 @@ object BackendApiClient {
 
     val backendService: BackendService = retrofit.create(BackendService::class.java)
 }
+*/
