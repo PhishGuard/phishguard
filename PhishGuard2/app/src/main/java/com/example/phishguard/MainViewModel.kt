@@ -5,11 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.phishguard.network.APIService
+//import com.example.phishguard.network.APIService
 
 import com.example.phishguard.network.data.Screenshot
-import com.example.phishguard.network.data.User
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 
 sealed interface PhishGuardUiState {
@@ -24,7 +24,7 @@ class MainViewModel : ViewModel() {
     var phishGuardUiState: PhishGuardUiState by mutableStateOf(PhishGuardUiState.Loading)
         private set
 
-    var screenshot: Screenshot by mutableStateOf(Screenshot(id = 0, name = "", description = ""))
+    var screenshot: Screenshot by mutableStateOf(Screenshot(name = ""))
     private var token: String by mutableStateOf("")
     var userId: Int by mutableStateOf(0)
 
@@ -56,26 +56,20 @@ class MainViewModel : ViewModel() {
         */
     }
     fun newScreenshot(id: String, screenshotName: String, description: String) {
-        /*
+/*
         phishGuardUiState = PhishGuardUiState.Loading
         viewModelScope.launch {
             phishGuardUiState = try {
                 APIService.getInstance().insertScreenshot(
                     Screenshot(
-                        id = 0,
-                        name = screenshotName,
-                        description = description,
-                        user_id = 1),
-
-                    "Bearer $token"
+                        name = screenshotName)
                 )
-                val devicesResults = APIService.getInstance().getScreenshots("Bearer $token")
+                val devicesResults = APIService.getInstance().getScreenshots()
                 PhishGuardUiState.Success(devicesResults)
             } catch (e: IOException) {
                 PhishGuardUiState.Error
             }
-        }
-        */
+        }*/
     }
     fun deleteScreenshot(id: String){
         /*

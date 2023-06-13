@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object BackendApiClient {
-    private const val BASE_URL = "http://localhost:5000"
+    private const val BASE_URL = "http://172.28.16.113:5000"
 
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)

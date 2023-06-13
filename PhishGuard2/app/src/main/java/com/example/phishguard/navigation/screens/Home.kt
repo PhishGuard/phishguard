@@ -1,6 +1,7 @@
 package com.example.phishguard.navigation.screens
 
 
+import android.widget.ImageView
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -18,9 +19,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.phishguard.MainViewModel
+import com.example.phishguard.R
 import com.example.phishguard.navigation.BottomNavigationBar
 import com.example.phishguard.navigation.NavRoutes
 import com.example.phishguard.navigation.TopBar
+import com.example.phishguard.network.makeAPICall
 
 
 @Composable
@@ -88,12 +91,14 @@ fun Home(
                             .padding(10.dp)
                     ) {
                         Button(onClick = {
-                            if (searchQuery.isNotEmpty() && removeId.isNotEmpty()) {
-                                viewModel.newScreenshot(
+                            if (searchQuery.isNotEmpty()) {
+                                /*viewModel.newScreenshot(
                                     screenshotName = searchQuery,
                                     id = removeId,
                                     description = description
-                                )
+                                )*/
+                                //val imageView = findViewById<ImageView>(R.id.imageView)
+                                makeAPICall("http://172.28.16.113:5000/newScreenshot", searchQuery)
                                 navController.navigate(NavRoutes.Home.route)
                             }
                         }) {
