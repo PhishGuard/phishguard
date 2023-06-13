@@ -33,7 +33,6 @@ fun Home(
 ) {
     var searchQuery by remember { mutableStateOf("") }
     var removeId by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
 
     val onSearchQueryChange = { text: String ->
         searchQuery = text
@@ -43,9 +42,6 @@ fun Home(
         removeId = text
     }
 
-    val descriptionChange = { text: String ->
-        description = text
-    }
 
     Column(modifier = Modifier.fillMaxSize()) {
         Scaffold(
@@ -77,13 +73,6 @@ fun Home(
                         keyboardType = KeyboardType.Number
                     )
 
-                    CustomTextField(
-                        title = "Description",
-                        textState = description,
-                        onTextChange = descriptionChange,
-                        keyboardType = KeyboardType.Text
-                    )
-
                     Row(
                         horizontalArrangement = Arrangement.SpaceEvenly,
                         modifier = Modifier
@@ -92,13 +81,10 @@ fun Home(
                     ) {
                         Button(onClick = {
                             if (searchQuery.isNotEmpty()) {
-                                /*viewModel.newScreenshot(
-                                    screenshotName = searchQuery,
-                                    id = removeId,
-                                    description = description
-                                )*/
-                                //val imageView = findViewById<ImageView>(R.id.imageView)
-                                makeAPICall("http://172.28.16.113:5000/newScreenshot", searchQuery)
+                                viewModel.newScreenshot(
+                                    screenshotName = searchQuery
+                                )
+                                makeAPICall("http://192.168.0.8:5000/newScreenshot", searchQuery)
                                 navController.navigate(NavRoutes.Home.route)
                             }
                         }) {
@@ -122,6 +108,28 @@ fun Home(
             }
         )
     }
+}
+
+
+@Composable
+fun CustomTextField(
+    title: String,
+    textState: String,
+    onTextChange: (String) -> Unit,
+    keyboardType: KeyboardType
+) {
+    OutlinedTextField(
+        value = textState,
+        onValueChange = { onTextChange(it) },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = keyboardType
+        ),
+        singleLine = true,
+        label = { Text(title) },
+        modifier = Modifier.padding(10.dp),
+        textStyle = TextStyle(fontWeight = FontWeight.Bold,
+            fontSize = 14.sp)
+    )
 }
 
 

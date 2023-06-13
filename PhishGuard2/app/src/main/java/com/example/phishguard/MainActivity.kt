@@ -11,7 +11,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.phishguard.navigation.NavRoutes
 import com.example.phishguard.navigation.screens.About
-import com.example.phishguard.navigation.screens.Login
 import com.example.phishguard.navigation.screens.Help
 import com.example.phishguard.navigation.screens.Home
 import com.example.phishguard.navigation.screens.List
@@ -72,11 +71,8 @@ fun MainScreen(
     }
     NavHost(
         navController = navController,
-        startDestination = NavRoutes.Login.route,
+        startDestination = NavRoutes.Home.route,
     ) {
-        composable(NavRoutes.Login.route) {
-            Login(navController = navController, viewModel = viewModel)
-        }
         composable(NavRoutes.Home.route) {
             Home(navController = navController, viewModel = viewModel)
         }

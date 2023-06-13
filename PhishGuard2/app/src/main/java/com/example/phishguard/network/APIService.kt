@@ -1,13 +1,5 @@
 package com.example.phishguard.network
 
-import Screenshot
-import com.example.phishguard.network.data.AccessInfo
-import com.example.phishguard.network.data.User
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.POST
-
 import okhttp3.*
 import java.io.IOException
 import java.io.FileOutputStream
@@ -40,7 +32,7 @@ fun makeAPICall(url: String, inputValue: String) {
             }
 
             // Get the image from the response body
-            val responseBody = response.body
+            val responseBody = response.body()
             responseBody?.let {
                 // Save the image to a file
                 val fileOutputStream = FileOutputStream("image.jpg")
