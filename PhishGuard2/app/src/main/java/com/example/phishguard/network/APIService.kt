@@ -1,7 +1,7 @@
 package com.example.phishguard.network
 
+import Screenshot
 import com.example.phishguard.network.data.AccessInfo
-import com.example.phishguard.network.data.Screenshot
 import com.example.phishguard.network.data.User
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

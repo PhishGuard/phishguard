@@ -91,8 +91,8 @@ fun CustomTextField(
         singleLine = true,
         label = { Text(title) },
         modifier = Modifier.padding(10.dp),
-        textStyle = TextStyle(fontWeight = FontWeight.Bold,
-            fontSize = 30.sp)
+        textStyle = TextStyle(fontWeight = FontWeight.Medium,
+            fontSize = 18.sp)
     )
 }
 

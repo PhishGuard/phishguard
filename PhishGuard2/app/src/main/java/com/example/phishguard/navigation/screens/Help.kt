@@ -3,6 +3,7 @@ package com.example.phishguard.navigation.screens
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -22,7 +23,7 @@ fun Help(navController: NavHostController) {
             topBar = {
                 TopBar(
                     title = "Help",
-                    buttonIcon = Icons.Filled.Menu,
+                    buttonIcon = Icons.Filled.Info,
                     onButtonClicked = {}
                 )
             },

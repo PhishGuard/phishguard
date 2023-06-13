@@ -52,8 +52,8 @@ fun Home(
             topBar = {
                 TopBar(
                     title = "Home",
-                    buttonIcon = Icons.Filled.List,
-                    onButtonClicked = {}
+                    buttonIcon = Icons.Filled.Home,
+                    onButtonClicked = { }
                 )
             },
             content = {

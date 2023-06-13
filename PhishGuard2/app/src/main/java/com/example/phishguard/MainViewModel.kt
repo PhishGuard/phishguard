@@ -1,15 +1,22 @@
 package com.example.phishguard
 
+import Screenshot
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+<<<<<<< HEAD
 import androidx.lifecycle.viewModelScope
 //import com.example.phishguard.network.APIService
 
 import com.example.phishguard.network.data.Screenshot
 import kotlinx.coroutines.launch
 import java.io.IOException
+=======
+import android.app.Application
+import androidx.lifecycle.MutableLiveData
+>>>>>>> 910adcc5968d8d2e9776fc79dc7665218fa0edbd
 
 
 sealed interface PhishGuardUiState {
@@ -24,7 +31,10 @@ class MainViewModel : ViewModel() {
     var phishGuardUiState: PhishGuardUiState by mutableStateOf(PhishGuardUiState.Loading)
         private set
 
+<<<<<<< HEAD
     var screenshot: Screenshot by mutableStateOf(Screenshot(name = ""))
+=======
+>>>>>>> 910adcc5968d8d2e9776fc79dc7665218fa0edbd
     private var token: String by mutableStateOf("")
     var userId: Int by mutableStateOf(0)
 
@@ -77,7 +87,7 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             phishGuardUiState = try {
                 APIService.getInstance().deleteScreenshot(
-                    deviceId,
+                    id,
                     "Bearer $token"
                 )
                 val devicesResults = APIService.getInstance().getScreenshots("Bearer $token")
@@ -88,13 +98,13 @@ class MainViewModel : ViewModel() {
         }
         */
     }
-    fun getScreenshot(deviceId: Int){
+    fun getScreenshot(id: String){
         /*
         phishGuardUiState = PhishGuardUiState.Loading
         viewModelScope.launch {
             phishGuardUiState = try {
                 val screenshotResult = APIService.getInstance().getScreenshot(
-                    deviceId,
+                    id,
                     "Bearer $token"
                 )
                 screenshotName = screenshotResult.name
@@ -106,35 +116,13 @@ class MainViewModel : ViewModel() {
             }
         } */
     }
-    fun editScreenshot(){
-        /*
-        phishGuardUiState = PhishGuardUiState.Loading
-        viewModelScope.launch {
-            phishGuardUiState = try {
-                APIService.getInstance().updateScreenshot(
-                    selectedId,
-                    Screenshot(
-                        id = selectedId,
-                        name = screenshotName,
-                        description = screenshotDescription,
-                        user_id = userId
-                    ),
-                    "Bearer $token"
-                )
-                val devicesResults = APIService.getInstance().getScreenshots("Bearer $token")
-                PhishGuardUiState.Success(devicesResults)
-            } catch (e: IOException) {
-                PhishGuardUiState.Error
-            }
-        } */
-    }
     fun getScreenshots(){
         /*
         phishGuardUiState = PhishGuardUiState.Loading
         viewModelScope.launch {
             phishGuardUiState = try {
-                val devicesResults = APIService.getInstance().getScreenshots("Bearer $token")
-                PhishGuardUiState.Success(devicesResults)
+                val screenshotsResults = APIService.getInstance().getScreenshots("Bearer $token")
+                PhishGuardUiState.Success(screenshotsResults)
             }catch (e: IOException) {
                 PhishGuardUiState.Error
             }
