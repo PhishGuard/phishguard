@@ -12,7 +12,6 @@ from termcolor import colored
 import io
 
 
-
 app = Flask(__name__)
 CORS(app)
 
@@ -67,6 +66,7 @@ def photos():
     clone.download_website(url, 1)
     screenshot.take_screenshot(url, 'screenshot.png', 10)
     image_path=cwd+"\\screenshot.png"
+
     image = Image.open(image_path)
 
     # Convert the image to bytes
@@ -80,4 +80,5 @@ def photos():
     
     
 if __name__ == '__main__':
-    app.run("192.168.0.8")
+    app.run("10.0.0.223")
+

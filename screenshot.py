@@ -48,7 +48,7 @@ def take_screenshot(url, output_file, time_to_wait):
         height = driver.execute_script("return Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight )")
         
         # Set the window size to match the full height of the webpage
-        driver.set_window_size(1920, 1080)
+        driver.set_window_size(1080, 1080)
 
         # Take screenshot and save to file
         driver.save_screenshot(output_file)

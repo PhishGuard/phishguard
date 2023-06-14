@@ -1,7 +1,9 @@
 package com.example.phishguard.navigation.screens
 
 
+import android.graphics.Bitmap
 import android.widget.ImageView
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -12,6 +14,11 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -33,9 +40,12 @@ fun Home(
 ) {
     var searchQuery by remember { mutableStateOf("") }
     var removeId by remember { mutableStateOf("") }
-
+    val imageBitmapState = remember { mutableStateOf<ImageBitmap?>(null) }
+    val isLoading = remember { mutableStateOf(false) }
     val onSearchQueryChange = { text: String ->
         searchQuery = text
+        //println("myinfo: Reset the image bitmap state")
+        //imageBitmapState.value = null
     }
 
     val onIdChange = { text: String ->
@@ -80,12 +90,25 @@ fun Home(
                             .padding(10.dp)
                     ) {
                         Button(onClick = {
+
                             if (searchQuery.isNotEmpty()) {
+                                println("myinfo: Button pressed")
+                                isLoading.value = true
+                                //imageBitmapState.value=null
                                 viewModel.newScreenshot(
                                     screenshotName = searchQuery
                                 )
-                                makeAPICall("http://192.168.0.8:5000/newScreenshot", searchQuery)
-                                navController.navigate(NavRoutes.Home.route)
+                                println("myinfo: making APIcall")
+                                makeAPICall(
+                                    "http://10.0.0.223:5000/newScreenshot",
+                                    searchQuery
+                                ) { bitmap ->
+                                    isLoading.value = false
+                                    println("myinfo: $bitmap")
+                                    println("myinfo: Bitmap size: ${bitmap.width} x ${bitmap.height}")
+                                    imageBitmapState.value = bitmap.asImageBitmap()
+                                }
+                                //navController.navigate(NavRoutes.Home.route)
                             }
                         }) {
                             Text("Add Phishing Page")
@@ -95,10 +118,27 @@ fun Home(
                                 viewModel.deleteScreenshot(
                                     id = removeId
                                 )
-                                navController.navigate(NavRoutes.Home.route)
+                                //navController.navigate(NavRoutes.Home.route)
                             }
                         }) {
                             Text("Delete Phishing Page")
+                        }
+
+                    }
+
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        if (isLoading.value) {
+                            Text("Loading...") // Display loading text while the API call is being made
+                        } else {
+                            imageBitmapState.value?.let { imageBitmap ->
+                                println("myinfo: imagechange")
+                                Image(
+                                    bitmap = imageBitmap,
+                                    contentDescription = "Image",
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentScale = ContentScale.Fit
+                                )
+                            }
                         }
                     }
                 }
