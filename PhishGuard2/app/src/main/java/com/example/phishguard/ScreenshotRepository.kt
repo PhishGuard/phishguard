@@ -8,39 +8,12 @@ import kotlinx.coroutines.*
 
 class ScreenshotRepository(private val screenshotDao: ScreenshotDao) {
 
-    val allScreenshots: LiveData<List<Screenshot>> = screenshotDao.getScreenshots()
-    val searchResults = MutableLiveData<List<Screenshot>>()
-
-    val searchResult = MutableLiveData<Screenshot>()
-
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
-    fun insertProduct(newscreenshot: Screenshot) {
+    fun getAllScreenshots() {
         coroutineScope.launch(Dispatchers.IO) {
-            screenshotDao.insertScreenshot(newscreenshot)
+            screenshotDao.getAllScreenshots()
         }
     }
 
-    fun deleteScreenshot(id: Int) {
-        coroutineScope.launch(Dispatchers.IO) {
-            screenshotDao.deleteScreenshot(id)
-        }
-    }
-
-    fun findScreenshot(name: String) {
-        coroutineScope.launch(Dispatchers.Main) {
-            searchResults.value = asyncFind(name).await()
-        }
-    }
-
-    private fun asyncFind(name: String): Deferred<List<Screenshot>?> =
-        coroutineScope.async(Dispatchers.IO) {
-            return@async screenshotDao.findScreenshots(name)
-        }
-
-    fun updateProduct(product: Screenshot) {
-        coroutineScope.launch(Dispatchers.IO) {
-            screenshotDao.updateScreenshot(product)
-        }
-    }
 }

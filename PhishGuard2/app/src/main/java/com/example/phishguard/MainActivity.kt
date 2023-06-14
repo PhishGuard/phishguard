@@ -12,8 +12,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.phishguard.navigation.NavRoutes
 import com.example.phishguard.navigation.screens.About
 import com.example.phishguard.navigation.screens.Help
-import com.example.phishguard.navigation.screens.Home
 import com.example.phishguard.navigation.screens.List
+import com.example.phishguard.navigation.screens.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import kotlinx.coroutines.launch

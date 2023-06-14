@@ -50,38 +50,3 @@ fun makeAPICall(url: String, inputValue: String, onSuccess: (Bitmap) -> Unit) {
         }
     })
 }
-
-// Usage: call this function with your API endpoint URL
-
-
-
-/*const val BASE_URL = "http://172.28.16.113:5000/"
-
-interface APIService {
-
-    @GET("screenshots")
-    suspend fun getScreenshots(): List<Screenshot>
-
-    @GET("newScreenshot")
-    suspend fun insertScreenshot(screenshot: Screenshot): List<Screenshot>
-
-
-    @POST("login")
-    suspend fun login(): List<User>
-
-    companion object {
-        var apiService: APIService? = null
-
-
-        fun getInstance(): APIService {
-            if (apiService == null) {
-                apiService = Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build().create(APIService::class.java)
-            }
-            return apiService!!
-        }
-    }
-}
-*/

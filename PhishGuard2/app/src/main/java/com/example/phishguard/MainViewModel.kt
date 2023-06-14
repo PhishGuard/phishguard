@@ -7,96 +7,33 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+
 import kotlinx.coroutines.launch
-import java.io.IOException
-import android.app.Application
-import androidx.lifecycle.MutableLiveData
-import com.example.phishguard.network.makeAPICall
 
-
-sealed interface PhishGuardUiState {
-    data class Success(val screenshots: List<Screenshot>) : PhishGuardUiState
-    data class GetScreenshot(val screenshot: Screenshot) : PhishGuardUiState
-    object Error : PhishGuardUiState
-    object Loading : PhishGuardUiState
+sealed class PhishGuardUiState {
+    object Loading : PhishGuardUiState()
+    data class Success(val screenshots: LiveData<List<Screenshot>>) : PhishGuardUiState()
+    data class Error(val message: String) : PhishGuardUiState()
 }
 
-
-class MainViewModel : ViewModel() {
+class MainViewModel() : ViewModel() {
     var phishGuardUiState: PhishGuardUiState by mutableStateOf(PhishGuardUiState.Loading)
         private set
-    var screenshot: Screenshot by mutableStateOf(Screenshot(name = ""))
 
-    private var token: String by mutableStateOf("")
+    private lateinit var screenshotDao: ScreenshotDao
 
-    var screenshotName: String by mutableStateOf("")
-    var screenshotDescription: String by mutableStateOf("")
-
-    private var selectedId: Int by mutableStateOf(-1)
-
-
-    fun newScreenshot(screenshotName: String) {
-        /*
-        phishGuardUiState = PhishGuardUiState.Loading
-        viewModelScope.launch {
-            phishGuardUiState = try {
-                makeAPICall().getInstance().insertScreenshot(
-                    Screenshot(
-                        name = screenshotName)
-                )
-                PhishGuardUiState.Success(devicesResults)
-            } catch (e: IOException) {
-                PhishGuardUiState.Error
-            }
-        }*/
+    init {
+        getAllScreenshots()
     }
-    fun deleteScreenshot(id: String){
-        /*
-        phishGuardUiState = PhishGuardUiState.Loading
+
+    fun getAllScreenshots() {
         viewModelScope.launch {
-            phishGuardUiState = try {
-                APIService.getInstance().deleteScreenshot(
-                    id,
-                    "Bearer $token"
-                )
-                val devicesResults = APIService.getInstance().getScreenshots("Bearer $token")
-                PhishGuardUiState.Success(devicesResults)
-            } catch (e: IOException) {
-                PhishGuardUiState.Error
+            try {
+                val screenshots = screenshotDao.getAllScreenshots()
+                phishGuardUiState = PhishGuardUiState.Success(screenshots)
+            } catch (e: Exception) {
+                phishGuardUiState = PhishGuardUiState.Error(e.message ?: "Unknown error occurred")
             }
         }
-        */
-    }
-    fun getScreenshot(id: String){
-        /*
-        phishGuardUiState = PhishGuardUiState.Loading
-        viewModelScope.launch {
-            phishGuardUiState = try {
-                val screenshotResult = APIService.getInstance().getScreenshot(
-                    id,
-                    "Bearer $token"
-                )
-                screenshotName = screenshotResult.name
-                screenshotDescription = screenshotResult.description
-
-                PhishGuardUiState.GetScreenshot(screenshotResult)
-            } catch (e: IOException) {
-                PhishGuardUiState.Error
-            }
-        } */
-    }
-    fun getScreenshots(){
-        /*
-        phishGuardUiState = PhishGuardUiState.Loading
-        viewModelScope.launch {
-            phishGuardUiState = try {
-                val screenshotsResults = APIService.getInstance().getScreenshots("Bearer $token")
-                PhishGuardUiState.Success(screenshotsResults)
-            }catch (e: IOException) {
-                PhishGuardUiState.Error
-            }
-        }
-        */
     }
 }
-
