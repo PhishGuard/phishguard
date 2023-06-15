@@ -66,7 +66,6 @@ fun About(navController: NavHostController) {
                     style = MaterialTheme.typography.body1,
                     modifier = Modifier.padding(all = 8.dp)
                 )
-                // Add other features with appropriate styles and padding
 
                 Text(
                     text = "Team",

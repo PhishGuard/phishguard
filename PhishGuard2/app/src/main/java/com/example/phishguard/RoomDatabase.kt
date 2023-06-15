@@ -16,11 +16,8 @@ abstract class RoomDatabase: RoomDatabase() {
         private var INSTANCE: RoomDatabase? = null
 
         fun getInstance(context: Context): RoomDatabase {
-            // the synchronized block cannot be interrupted by another thread
-            // (=atomic, see transactions)
             synchronized(this) {
                 var instance = INSTANCE
-                // create one instance and reuse it
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,

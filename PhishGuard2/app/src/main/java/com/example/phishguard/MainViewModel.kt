@@ -21,10 +21,17 @@ class MainViewModel() : ViewModel() {
         private set
 
     private lateinit var screenshotDao: ScreenshotDao
+    private lateinit var screenshotRepository: ScreenshotRepository
+
 
     init {
         getAllScreenshots()
     }
+
+    fun insertScreenshot(screenshot: Screenshot) {
+        screenshotRepository.insertScreenshot(screenshot)
+    }
+
 
     fun getAllScreenshots() {
         viewModelScope.launch {

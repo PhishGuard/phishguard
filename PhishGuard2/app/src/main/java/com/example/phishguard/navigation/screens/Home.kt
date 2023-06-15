@@ -87,7 +87,7 @@ fun Home(
                         if (searchQuery.isNotEmpty()) {
                             isLoading.value = true
                             makeAPICall(
-                                "http://192.168.0.6:5000/newScreenshot",
+                                "http://172.28.16.71:5000/newScreenshot",
                                 searchQuery
                             ) { bitmap ->
                                 isLoading.value = false

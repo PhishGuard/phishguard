@@ -80,5 +80,5 @@ def photos():
     
     
 if __name__ == '__main__':
-    app.run("192.168.0.6")
+    app.run("172.28.16.71")
 
